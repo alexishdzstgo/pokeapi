@@ -97,13 +97,13 @@ const Pokedex = () => {
                     }
                 </ul>
                 
-            <button onClick={() => setNumPage(numPage - 1)} disabled={numPage === 1}>Prev</button>
+            <button className='active' onClick={() => setNumPage(numPage - 1)} disabled={numPage === 1}>Prev</button>
                 {
                     numbers.map(pages => (
-                        <button key={pages} onClick={() => setNumPage(pages)}>{pages}</button>
+                        <button className='active' key={pages} onClick={() => setNumPage(pages)}>{pages}</button>
                     ))
                 }
-                <button onClick={() => setNumPage(numPage + 1)} disabled={numPage === lastNumPage}>Next</button>
+                <button className='active' onClick={() => setNumPage(numPage + 1)} disabled={numPage === lastNumPage}>Next</button>
         </div>
     );
 

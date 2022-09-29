@@ -258,7 +258,55 @@ datalist{
   border: 0;
   box-shadow: 0 0 1.5rem .1rem rgba(2, 2, 2, 0.281);
 }
+.card-pokemon{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
+.name{
+  font-family:  'Montserrat';
+  font-size: 25px;
+  position: absolute;
+  letter-spacing: 1px;
+  margin-top: 200px;
+  visibility: hidden;
+}
+.name:first-letter {
+
+  text-transform: uppercase;
+
+}
+.prof{
+  font-size: 25px;
+  position: absolute;
+  margin-top: 120px;
+  visibility: hidden;
+}
+.divider{
+  background-color: #949594;
+  height: 1.5px;
+  width: 50px;
+  position:absolute;
+  margin-top: 250px;
+  visibility: hidden;
+}
+.bio{
+  margin-top: 180px;
+  position: absolute;
+  text-align: center;
+  font-size: 15px;
+  visibility: hidden;
+}
+.photo{
+  height: 100%;
+  width: 100%;
+  
+}
+.card:hover .saludo{
+  /*display: block;*/
+}
 
 
 .grass{
@@ -324,9 +372,81 @@ datalist{
 
 .card:hover .img-pokemon{ 
   background: #ffffff;
-  transform: scale(0.5,0.5) translateY(-15rem);
-  background-size: 100% 150%;
+  transform: scale(1,1) translateY(-2rem);
+  background-size: 110% 150%;
   background-position: 0 -25px;
   border-radius: 50%;
   filter: none;
+}
+.card:hover .name{
+  visibility: visible;
+  transition-delay: 0.3s;
+}
+.card:hover .prof{
+  visibility: visible;
+  transition-delay: 0.6s;
+}
+
+.card:hover .divider{
+  visibility: visible;
+  transition-delay: 0.3s;
+}
+.card:hover .bio{
+  visibility: visible;
+  transition-delay: 0.8s;
+}
+/* ----------  Pokemon detail  ---------- */
+.details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+.img-details{
+  width: 45rem;
+  height: auto;
+}
+.detail{
+  width: 70%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.wyh{
+  display: flex;
+  width: 50%;
+  font-size: 15px;
+  justify-content: space-between;
+}
+.name-pokemon{
+  font-family:  'Montserrat';
+  font-size: 35px;
+}
+.name-pokemon:first-letter {
+
+  text-transform: uppercase;
+
+}
+.active{
+  border: 0;
+    background: #287dfc;
+    color: #fff;
+    box-shadow: 2px 2px 8px grey;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+    cursor: pointer;
+    outline: 0;
+    transition: .2s;
 }
