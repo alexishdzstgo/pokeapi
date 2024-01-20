@@ -5,6 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import PokemonItem from './PokemonItem';
 
 const Pokedex = () => {
+    const [theme, setTheme] = useState('light')
+    const toggleTheme = () =>{
+        if (theme === 'light') {
+            setTheme('darkk')
+        }else {
+            setTheme('light')
+        }
+    }
+
     const user = useSelector(state => state.user)
     const [pokemons, setPokemons] = useState([])
     const [namePokemon, setNamePokemon] = useState("")
@@ -18,9 +27,9 @@ const Pokedex = () => {
             .then(res => setPokemons(res.data.results))
         axios.get('https://pokeapi.co/api/v2/type')
             .then(res => setTypePokemon(res.data.results) )
+
     },[]);
-    //console.log(pokemons)
-    //console.log(typePokemon)
+
     const search = e => {
         e.preventDefault();
         //alert(namePokemon)
@@ -32,28 +41,50 @@ const Pokedex = () => {
         //pokeapi.co/api/v2/type/1
         .then(res => setPokemons(res.data.pokemon))
     }
-    //console.log(pokemons)
     const [numPage, setNumPage] = useState(1)
     const lastIndex = numPage * 16
     const firstIndex = lastIndex - 16
     const pokemonPaginated = pokemons.slice(firstIndex, lastIndex)
     const [activeSearch, setActiveSearch] = useState(false)
 
-    const lastNumPage = Math.ceil(pokemons.length / 16)
+    const lastNumPage = Math.ceil(pokemons.length / 16) //de 1000 a 73 reg.
+
     const numbers = []
     for(let i = 1; i <= lastNumPage; i++) {
         numbers.push(i)
     }
+    //
+    
+    let numPageFinish = numPage + 10
+    let numPageInit = numPageFinish - 10
+    let numbersPaginated = numbers.slice(numPage -1, numPageFinish)
+    if (numPage > 4){
+        numPageFinish = numPage + 5
+        numPageInit = numPageFinish - 10
+        numbersPaginated = numbers.slice(numPageInit , numPageFinish)
+    }
+    //
     const active = () => setActiveSearch(!activeSearch)
     const clear = () =>{
         document.getElementById('mysearch').value = ''
     }
 
     return (
-        <div   className='pokedex text-center'>
+        
+        <div   className={`${theme} text-center`}>
+
             <h3>Poquedex</h3>
+            <div className='toggle'>
+            <input 
+                className='ocultar' 
+                type="checkbox"  
+                id="darkmode-toggle"
+                onChange={toggleTheme}
+            />
+            <label htmlFor="darkmode-toggle" />
+            </div>
+
             <p className='p-text'>Welcome <b>{user}</b>, here you can find your favorite pokemon </p>
-                
                 <div className='form-search'>
                 <form onSubmit={search}>
 
@@ -97,13 +128,13 @@ const Pokedex = () => {
                     }
                 </ul>
                 
-            <button className='active' onClick={() => setNumPage(numPage - 1)} disabled={numPage === 1}>Prev</button>
+                <button className={numPage === 1 ? 'inactive' : 'activebtn'} onClick={() => setNumPage(numPage - 1)} disabled={numPage === 1}>Prev</button>
                 {
-                    numbers.map(pages => (
-                        <button className='active' key={pages} onClick={() => setNumPage(pages)}>{pages}</button>
+                    numbersPaginated.map(pages  => (
+                        <button className={pages == numPage ? 'activebtn' : 'disabled'} key={pages} onClick={() => setNumPage(pages)}>{pages}</button>
                     ))
                 }
-                <button className='active' onClick={() => setNumPage(numPage + 1)} disabled={numPage === lastNumPage}>Next</button>
+                <button className={numPage === lastNumPage ? 'inactive' : 'activebtn'} onClick={() => setNumPage(numPage + 1)} disabled={numPage === lastNumPage}>Next</button>
         </div>
     );
 

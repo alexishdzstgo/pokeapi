@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const PokemonDetail = () => {
+    const history = useNavigate();
     const [pokemon, setPokemon] = useState({})
     const { name } = useParams()
 
@@ -10,10 +11,10 @@ const PokemonDetail = () => {
         axios(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .then(res => setPokemon(res.data))
     },[name])
-    console.log(pokemon)
+    /*console.log(pokemon)*/
     return (
         <div  className={`details ${pokemon.types?.[0].type.name}`}>
-            
+            <button className='btn'  onClick={()=> history(-1)}><ion-icon name="return-up-back-outline"></ion-icon></button>
             <img className='img-details' src={pokemon.sprites?.other.home.front_default} alt="" />
            <div className='detail'>
                 <h1 className='name-pokemon'> {pokemon.name}</h1>
