@@ -73,7 +73,7 @@ const Pokedex = () => {
         
         <div   className={`${theme} text-center`}>
 
-            <h3>Poquedex</h3>
+            <h3>Poquedeeeeex</h3>
             <div className='toggle'>
             <input 
                 className='ocultar' 
